@@ -12,7 +12,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Box, SelectedBox } from "../components/Box";
 import { useState } from "react";
-import { events } from "../data/events";
+import { events } from "../constants/events";
 
 interface props {
   children: React.ReactNode;
