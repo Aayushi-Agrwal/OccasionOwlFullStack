@@ -7,11 +7,11 @@ interface props {
 }
 export const Login: React.FC<props> = ({ setLoginState }) => {
   return (
-    <main className="flex flex-col items-center justify-center h-screen bg-gradient-to-r from-sky-700 to-indigo-800">
+    <main className="flex flex-col w-3/5 items-center justify-center h-screen bg-gradient-to-r from-sky-700 to-indigo-800">
       <div className="fixed top-4 left-12 text-2xl bg-gradient-to-r from-blue-400 via-sky-400 to-indigo-200 inline-block text-transparent bg-clip-text">
         OccasionOwl
       </div>
-      <div className="w-1/2 pb-32">
+      <div className="w-1/2">
         <h1 className="text-3xl font-medium tracking-wide mb-4 w-2/3">
           <div className="animate-typing overflow-hidden whitespace-nowrap border-r-4 border-r-white text-white">
             Welcome to OccasionOwl
@@ -26,7 +26,7 @@ export const Login: React.FC<props> = ({ setLoginState }) => {
           away.
         </p>
       </div>
-      <div className="flex justify-around w-screen">
+      {/* <div className="flex justify-around w-screen">
         <div className="text-left pb-4">
           <h1 className="text-3xl font-medium tracking-wide">
             Login to continue
@@ -41,7 +41,7 @@ export const Login: React.FC<props> = ({ setLoginState }) => {
           <FontAwesomeIcon icon={faGoogle} />
           Sign in with Google
         </div>
-      </div>
+      </div> */}
     </main>
   );
 };
