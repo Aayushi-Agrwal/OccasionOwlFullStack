@@ -11,8 +11,8 @@ export const Login: React.FC<props> = ({ setLoginState }) => {
       <div className="fixed top-4 left-12 text-2xl bg-gradient-to-r from-blue-400 via-sky-400 to-indigo-200 inline-block text-transparent bg-clip-text">
         OccasionOwl
       </div>
-      <div className="w-1/2">
-        <h1 className="text-3xl font-medium tracking-wide mb-4 w-2/3">
+      <div className="w-1/2 pb-32">
+        <h1 className="text-3xl font-medium tracking-wide mb-4">
           <div className="animate-typing overflow-hidden whitespace-nowrap border-r-4 border-r-white text-white">
             Welcome to OccasionOwl
             <span className="text-sky-400 text-6xl">.</span>

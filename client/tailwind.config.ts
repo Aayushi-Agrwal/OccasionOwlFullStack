@@ -33,7 +33,7 @@ const config: Config = {
         },
       },
       animation: {
-        typing: "typing 2s steps(20) infinite alternate, blink 0.7s infinite",
+        typing: "typing 3s steps(20) infinite alternate, blink 0.7s infinite",
       },
     },
   },
