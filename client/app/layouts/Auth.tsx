@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 interface props {
   setLoginState: React.Dispatch<React.SetStateAction<any>>;
 }
@@ -31,12 +33,18 @@ export const Login: React.FC<props> = ({ setLoginState }) => {
         </h1>
 
         <div className="flex gap-8">
-          <div className="flex text-lg bg-violet-700 px-16 py-2 justify-center rounded-lg items-center transition hover:translate-y-0.5 cursor-pointer">
+          <Link
+            href="/login"
+            className="flex text-lg bg-violet-700 px-16 py-2 justify-center rounded-lg items-center transition hover:translate-y-0.5 cursor-pointer"
+          >
             Log in
-          </div>
-          <div className="flex text-lg bg-violet-700 px-16 py-2 justify-center rounded-lg items-center transition hover:translate-y-0.5 cursor-pointer">
+          </Link>
+          <Link
+            href="/signup"
+            className="flex text-lg bg-violet-700 px-16 py-2 justify-center rounded-lg items-center transition hover:translate-y-0.5 cursor-pointer"
+          >
             Sign up
-          </div>
+          </Link>
         </div>
       </div>
     </main>
