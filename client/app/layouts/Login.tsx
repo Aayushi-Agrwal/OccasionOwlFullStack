@@ -1,7 +1,3 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGoogle } from "@fortawesome/free-brands-svg-icons";
-import Link from "next/link";
-
 interface props {
   setLoginState: React.Dispatch<React.SetStateAction<any>>;
 }
