@@ -2,7 +2,7 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { InputField, InputFieldPassword } from "@/app/components/Input";
-import { BoxButton } from "@/app/components/Button";
+import { BoxButton, BoxButtonWhite } from "@/app/components/Button";
 
 export default function Signup() {
   return (
@@ -37,9 +37,9 @@ export default function Signup() {
             <div className="flex-grow border-t border-white"></div>
           </div>
 
-          <div className="h-12 w-full flex gap-4 text-lg border-2 border-white py-2 justify-center rounded-lg items-center transition hover:translate-y-0.5 cursor-pointer">
+          <BoxButtonWhite>
             <FontAwesomeIcon icon={faGoogle} /> Continue with Google
-          </div>
+          </BoxButtonWhite>
         </div>
       </div>
     </main>

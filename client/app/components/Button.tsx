@@ -10,6 +10,11 @@ interface PropsLink {
   name: string;
   href: Url;
 }
+
+interface PropsBoxChildren {
+  children: React.ReactNode;
+}
+
 export const LinkButton: React.FC<PropsLink> = ({ name, href }) => {
   return (
     <Link
@@ -28,6 +33,14 @@ export const BoxButton: React.FC<PropsBox> = ({ name, type }) => {
       type={type}
     >
       {name}
+    </button>
+  );
+};
+
+export const BoxButtonWhite: React.FC<PropsBoxChildren> = ({ children }) => {
+  return (
+    <button className="h-12 w-full flex gap-4 text-lg border-2 border-white py-2 justify-center rounded-lg items-center transition hover:translate-y-0.5 cursor-pointer">
+      {children}
     </button>
   );
 };
