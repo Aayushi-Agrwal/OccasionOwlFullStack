@@ -1,4 +1,7 @@
 import SignupFlow from "@/app/features/signup/components/signupform";
+import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 
 export default function Signup() {
   return (
@@ -44,6 +47,23 @@ export default function Signup() {
             Sign Up
           </button>
         </form>
+        <p className="pt-4">
+          Already have an account?{" "}
+          <Link className="text-violet-300" href="/">
+            Log in
+          </Link>
+        </p>
+        <div className="flex gap-6 flex-col items-center justify-center">
+          <div className="relative flex pt-6 items-center w-[20rem]">
+            <div className="flex-grow border-t border-white"></div>
+            <span className="flex-shrink mx-4 text-white">OR</span>
+            <div className="flex-grow border-t border-white"></div>
+          </div>
+
+          <div className="h-12 w-full flex gap-4 text-lg border-2 border-white py-2 justify-center rounded-lg items-center transition hover:translate-y-0.5 cursor-pointer">
+            <FontAwesomeIcon icon={faGoogle} /> Continue with Google
+          </div>
+        </div>
       </div>
     </main>
   );
