@@ -47,8 +47,10 @@ export const InputFieldPassword: React.FC<IInput> = ({ label }) => {
         placeholder=" "
       />
       <button
-        className="bg-inherit absolute h-full hover:scale-110 flex justify-center items-center px-4 py-1 right-0"
-        onClick={() => setShowPassword(!showPassword)}
+        className="bg-black red-500 absolute h-10 hover:scale-110 flex justify-center items-center px-2 py-1 right-1 top-1"
+        onClick={(e) => {
+          e.preventDefault(), setShowPassword(!showPassword);
+        }}
       >
         <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
       </button>

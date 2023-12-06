@@ -9,7 +9,7 @@ export default function Signup() {
     <main className="w-screen h-screen">
       <div className="flex h-full flex-col justify-center items-center">
         <h1 className="text-2xl tracking-wider pb-8">Create your account</h1>
-        <form className="flex flex-col gap-8 items-center justify-center">
+        <form className="flex flex-col gap-6 items-center justify-center">
           <div className="relative group">
             <InputField
               id="email"
