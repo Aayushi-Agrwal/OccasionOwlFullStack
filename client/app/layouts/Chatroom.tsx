@@ -7,7 +7,6 @@ import {
   faCircle,
   faPlus,
   faMicrophone,
-  faArrowAltCircleLeft,
   faArrowRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { Box, SelectedBox } from "../components/Box";
