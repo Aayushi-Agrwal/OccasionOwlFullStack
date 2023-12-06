@@ -2,6 +2,7 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { InputField, InputFieldPassword } from "@/app/components/Input";
+import { BoxButton } from "@/app/components/Button";
 
 export default function Signup() {
   return (
@@ -21,12 +22,7 @@ export default function Signup() {
           <div className="relative group">
             <InputFieldPassword label="Password" />
           </div>
-          <button
-            className="h-12 w-full flex text-lg bg-violet-700 px-16 py-2 justify-center rounded-lg items-center transition hover:translate-y-0.5 cursor-pointer"
-            type="submit"
-          >
-            Sign Up
-          </button>
+          <BoxButton type="submit" name="Sign Up" />
         </form>
         <p className="pt-4">
           Already have an account?{" "}

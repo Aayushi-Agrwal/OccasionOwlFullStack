@@ -34,8 +34,8 @@ export const Auth: React.FC<props> = ({ setLoginState }) => {
 
         <div className="flex gap-8">
           <Link
-            href="/login"
             className="flex text-lg bg-violet-700 px-16 py-2 justify-center rounded-lg items-center transition hover:translate-y-0.5 cursor-pointer"
+            href="/login"
           >
             Log in
           </Link>
