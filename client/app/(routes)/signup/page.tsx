@@ -15,18 +15,11 @@ export default function Signup() {
               name="email"
               label="Email address"
               type="email"
-              htmlFor="email"
             />
           </div>
 
           <div className="relative group">
-            <InputFieldPassword
-              id="password"
-              name="password"
-              label="Password"
-              type="password"
-              htmlFor="password"
-            />
+            <InputFieldPassword label="Password" />
           </div>
           <button
             className="h-12 w-full flex text-lg bg-violet-700 px-16 py-2 justify-center rounded-lg items-center transition hover:translate-y-0.5 cursor-pointer"
