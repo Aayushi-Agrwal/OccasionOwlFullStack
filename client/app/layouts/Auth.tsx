@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { LinkButton } from "../components/Button";
 
 interface props {
   setLoginState: React.Dispatch<React.SetStateAction<any>>;
@@ -33,18 +34,8 @@ export const Auth: React.FC<props> = ({ setLoginState }) => {
         </h1>
 
         <div className="flex gap-8">
-          <Link
-            className="flex text-lg bg-violet-700 px-16 py-2 justify-center rounded-lg items-center transition hover:translate-y-0.5 cursor-pointer"
-            href="/login"
-          >
-            Log in
-          </Link>
-          <Link
-            href="/signup"
-            className="flex text-lg bg-violet-700 px-16 py-2 justify-center rounded-lg items-center transition hover:translate-y-0.5 cursor-pointer"
-          >
-            Sign up
-          </Link>
+          <LinkButton name="Log in" href="/login" />
+          <LinkButton name="Sign up" href="/signup" />
         </div>
       </div>
     </main>
