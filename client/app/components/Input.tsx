@@ -2,16 +2,23 @@
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { ChangeEventHandler, useState } from "react";
 
 interface IInput {
   label: string;
   id?: string;
   name?: string;
   type?: string;
+  onChange?: ChangeEventHandler<HTMLInputElement> | undefined;
 }
 
-export const InputField: React.FC<IInput> = ({ id, name, label, type }) => {
+export const InputField: React.FC<IInput> = ({
+  id,
+  name,
+  label,
+  type,
+  onChange,
+}) => {
   return (
     <>
       <div className="relative">
@@ -22,6 +29,7 @@ export const InputField: React.FC<IInput> = ({ id, name, label, type }) => {
           required
           className="block bg-inherit border-2 h-12 rounded-md w-[20rem] px-4 text-sm peer"
           placeholder=" "
+          onChange={onChange}
         />
         <label
           htmlFor={id}
@@ -34,7 +42,7 @@ export const InputField: React.FC<IInput> = ({ id, name, label, type }) => {
   );
 };
 
-export const InputFieldPassword: React.FC<IInput> = ({ label }) => {
+export const InputFieldPassword: React.FC<IInput> = ({ label, onChange }) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   return (
     <div className="flex">
@@ -45,6 +53,7 @@ export const InputFieldPassword: React.FC<IInput> = ({ label }) => {
         required
         className="block bg-inherit border-2 h-12 rounded-md w-[20rem] pl-4 pr-12 text-sm peer"
         placeholder=" "
+        onChange={onChange}
       />
       <button
         className="bg-black red-500 absolute h-10 hover:scale-110 flex justify-center items-center px-2 py-1 right-1 top-1"
