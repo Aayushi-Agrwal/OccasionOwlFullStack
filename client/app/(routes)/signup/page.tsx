@@ -1,4 +1,3 @@
-import { LoginForm } from "@/app/features/login/components/loginForm";
 import { SignupForm } from "@/app/features/signup/components/SignupForm";
 
 export default function Signup() {

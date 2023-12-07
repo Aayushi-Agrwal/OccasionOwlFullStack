@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { LinkButton } from "../components/Button";
 
-interface props {
-  setLoginState: React.Dispatch<React.SetStateAction<any>>;
-}
-export const Auth: React.FC<props> = ({ setLoginState }) => {
+// interface props {
+//   setLoginState: React.Dispatch<React.SetStateAction<any>>;
+// }
+export const Auth = () => {
   return (
     <main className="flex">
       <div className="flex flex-col w-3/5 items-center justify-center h-screen bg-gradient-to-r from-sky-700 to-indigo-800">

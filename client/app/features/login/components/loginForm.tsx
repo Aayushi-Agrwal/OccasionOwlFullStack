@@ -8,7 +8,9 @@ import Link from "next/link";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  onAuthStateChanged,
 } from "firebase/auth";
+import firebase from "firebase/app";
 import { auth } from "@/app/lib/firebase";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -19,6 +21,7 @@ interface props {
   message: string;
   messageAction: string;
 }
+
 export const LoginForm: React.FC<props> = ({
   title,
   buttonTitle,
@@ -46,6 +49,17 @@ export const LoginForm: React.FC<props> = ({
       });
   };
 
+  // const monitorAuthState = async () => {
+  //   onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //       console.log("authenticated", user);
+  //     } else {
+  //       console.log("signed out");
+  //     }
+  //   });
+  // };
+
+  // monitorAuthState();
   return (
     <div className="flex h-full flex-col justify-center items-center">
       <h1 className="text-2xl tracking-wider pb-8">{title}</h1>
