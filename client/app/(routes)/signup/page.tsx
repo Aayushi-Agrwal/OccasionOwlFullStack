@@ -1,9 +1,10 @@
 import { LoginForm } from "@/app/features/login/components/loginForm";
+import { SignupForm } from "@/app/features/signup/components/SignupForm";
 
 export default function Signup() {
   return (
     <main className="w-screen h-screen">
-      <LoginForm
+      <SignupForm
         title="Create your account"
         buttonTitle="Sign up"
         message="Already have an account?"

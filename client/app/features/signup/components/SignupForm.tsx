@@ -19,7 +19,7 @@ interface props {
   message: string;
   messageAction: string;
 }
-export const LoginForm: React.FC<props> = ({
+export const SignupForm: React.FC<props> = ({
   title,
   buttonTitle,
   message,
@@ -30,22 +30,24 @@ export const LoginForm: React.FC<props> = ({
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const onSubmitLogin = (e: { preventDefault: () => void }) => {
+  const onSubmitSignup = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
+
+    await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        router.push("/");
         console.log(user);
+        router.push("/");
+        // ...
       })
-      .catch((error) => {
+      .catch((error: { code: any; message: any }) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
+        // ..
       });
   };
-
   return (
     <div className="flex h-full flex-col justify-center items-center">
       <h1 className="text-2xl tracking-wider pb-8">{title}</h1>
@@ -66,7 +68,7 @@ export const LoginForm: React.FC<props> = ({
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <BoxButton type="submit" name={buttonTitle} onClick={onSubmitLogin} />
+        <BoxButton type="submit" name={buttonTitle} onClick={onSubmitSignup} />
       </form>
       <p className="pt-4">
         {message}
