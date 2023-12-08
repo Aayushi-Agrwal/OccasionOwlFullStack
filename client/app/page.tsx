@@ -1,8 +1,8 @@
 "use client";
 
-import { Auth } from "./layouts/Auth";
+import { Auth } from "./layouts/LAuth";
 import useFirebaseUser from "./hooks/useFirebaseUser";
-import ChatRoom from "./layouts/ChatRoom";
+import ChatRoom from "./layouts/LChatroom";
 
 export default function Home() {
   const user = useFirebaseUser();

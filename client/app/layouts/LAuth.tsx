@@ -34,8 +34,8 @@ export const Auth = () => {
         </h1>
 
         <div className="flex gap-8">
-          <LinkButton name="Log in" href="/login" />
-          <LinkButton name="Sign up" href="/signup" />
+          <LinkButton name="Log in" href="/auth/login" />
+          <LinkButton name="Sign up" href="/auth/signup" />
         </div>
       </div>
     </main>

@@ -174,7 +174,7 @@ export default function ChatRoom() {
     signOut(auth)
       .then(() => {
         // Sign-out successful.
-        router.push("/authpage");
+        router.push("/auth");
         console.log("Signed out successfully");
       })
       .catch((error) => {
