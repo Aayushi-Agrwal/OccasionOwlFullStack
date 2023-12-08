@@ -38,7 +38,7 @@ export const SignupForm: React.FC<props> = ({
         // Signed in
         const user = userCredential.user;
         console.log(user);
-        router.push("/");
+        router.push("/chatroom");
         // ...
       })
       .catch((error: { code: any; message: any }) => {

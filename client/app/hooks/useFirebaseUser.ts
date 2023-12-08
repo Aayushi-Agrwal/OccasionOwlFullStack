@@ -1,7 +1,7 @@
 "use client";
 import { auth } from "@/app/lib/firebase";
 import { User } from "firebase/auth";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function useFirebaseUser() {
@@ -10,7 +10,7 @@ export default function useFirebaseUser() {
   useEffect(() => {
     auth.onAuthStateChanged(async (user) => {
       if (user) {
-        router.replace("/");
+        // router.refresh;
         setUser(user);
         console.log("authenticated", user);
       } else {

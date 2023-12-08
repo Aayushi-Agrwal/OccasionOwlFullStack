@@ -39,8 +39,8 @@ export const LoginForm: React.FC<props> = ({
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        router.push("/");
-        console.log(user);
+        router.push("/chatroom");
+        console.log("user");
       })
       .catch((error) => {
         const errorCode = error.code;
