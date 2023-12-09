@@ -1,9 +1,5 @@
-import Link from "next/link";
 import { LinkButton } from "../components/Button";
 
-// interface props {
-//   setLoginState: React.Dispatch<React.SetStateAction<any>>;
-// }
 export const Auth = () => {
   return (
     <main className="flex">
