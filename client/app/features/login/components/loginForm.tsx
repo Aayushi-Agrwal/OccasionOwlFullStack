@@ -5,15 +5,9 @@ import { InputField, InputFieldPassword } from "@/app/components/Input";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-} from "firebase/auth";
-import firebase from "firebase/app";
-import { auth } from "@/app/lib/firebase";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import useFirebaseUser from "@/app/hooks/useFirebaseUser";
 
 interface props {
   title: string;
@@ -32,34 +26,8 @@ export const LoginForm: React.FC<props> = ({
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { user, login } = useFirebaseUser();
 
-  const onSubmitLogin = (e: { preventDefault: () => void }) => {
-    e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        router.push("/chatroom");
-        console.log("user");
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-      });
-  };
-
-  // const monitorAuthState = async () => {
-  //   onAuthStateChanged(auth, (user) => {
-  //     if (user) {
-  //       console.log("authenticated", user);
-  //     } else {
-  //       console.log("signed out");
-  //     }
-  //   });
-  // };
-
-  // monitorAuthState();
   return (
     <div className="flex h-full flex-col justify-center items-center">
       <h1 className="text-2xl tracking-wider pb-8">{title}</h1>
@@ -80,7 +48,11 @@ export const LoginForm: React.FC<props> = ({
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <BoxButton type="submit" name={buttonTitle} onClick={onSubmitLogin} />
+        <BoxButton
+          type="submit"
+          name={buttonTitle}
+          onClick={(e) => login(e, email, password)}
+        />
       </form>
       <p className="pt-4">
         {message}
