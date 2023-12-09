@@ -9,10 +9,10 @@ import {
   faMicrophone,
   faArrowRight,
 } from "@fortawesome/free-solid-svg-icons";
-import { Box, SelectedBox } from "../components/Box";
+import { Box, SelectedBox } from "@/app/components/Box";
 import { useState } from "react";
-import { events } from "../constants/events";
-import useFirebaseUser from "../hooks/useFirebaseUser";
+import { events } from "@/app/constants/events";
+import useFirebaseUser from "@/app/hooks/useFirebaseUser";
 
 interface props {
   children: React.ReactNode;

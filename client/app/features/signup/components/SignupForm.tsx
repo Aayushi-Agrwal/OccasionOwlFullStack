@@ -52,7 +52,7 @@ export const SignupForm: React.FC<props> = ({
       </form>
       <p className="pt-4">
         {message}
-        <Link className="text-violet-300" href="/">
+        <Link className="text-violet-300" href="/auth">
           {messageAction}
         </Link>
       </p>

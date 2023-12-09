@@ -1,10 +1,13 @@
 "use client";
 
-import { Auth } from "./layouts/LAuth";
+import Chatroom from "@/app/features/chatroom/page";
+import { Auth } from "@/app/features/auth/components/authScreen";
 import useFirebaseUser from "./hooks/useFirebaseUser";
-import ChatRoom from "./layouts/LChatroom";
+import { usePathname } from "next/navigation";
 
 export default function Home() {
   const user = useFirebaseUser();
-  return <>{user != null ? <ChatRoom /> : <Auth />}</>;
+  const pathname = usePathname();
+  const isApp = pathname.startsWith("/app");
+  return <>{user != null ? <Chatroom /> : <Auth />}</>;
 }

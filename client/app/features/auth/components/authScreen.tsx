@@ -1,4 +1,4 @@
-import { LinkButton } from "../components/Button";
+import { LinkButton } from "@/app/components/Button";
 
 export const Auth = () => {
   return (
