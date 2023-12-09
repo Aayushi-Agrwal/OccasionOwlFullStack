@@ -12,9 +12,7 @@ import {
 import { Box, SelectedBox } from "../components/Box";
 import { useState } from "react";
 import { events } from "../constants/events";
-import { signOut } from "firebase/auth";
-import { auth } from "@/app/lib/firebase";
-import { useRouter } from "next/navigation";
+import useFirebaseUser from "../hooks/useFirebaseUser";
 
 interface props {
   children: React.ReactNode;
@@ -167,20 +165,7 @@ const Chat = ({ name }: { name: string }) => {
 export default function ChatRoom() {
   const [team, setTeam] = useState("");
   const [event, setEvent] = useState(events[0].name);
-
-  const router = useRouter();
-
-  const handleLogout = () => {
-    signOut(auth)
-      .then(() => {
-        // Sign-out successful.
-        router.push("/auth");
-        console.log("Signed out successfully");
-      })
-      .catch((error) => {
-        // An error happened.
-      });
-  };
+  const { logout } = useFirebaseUser();
 
   const mapEventName = events.map(
     (eventData: { name: string }, key: number) => {
@@ -253,7 +238,7 @@ export default function ChatRoom() {
     //   just a test page
     // </div>
     <div className="bg-[#463C72] h-screen w-screen flex justify-around cursor-default">
-      <p onClick={handleLogout}>Logout</p>
+      <p onClick={logout}>Logout</p>
       <EventsChat>{mapEventName}</EventsChat>
       <TeamsChat
         eventName={event}

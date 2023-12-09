@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
   onAuthStateChanged,
 } from "firebase/auth";
 import { useEffect, useState } from "react";
@@ -68,5 +69,20 @@ export default function useFirebaseUser() {
       });
   };
 
-  return { user, login, signup };
+  const logout = async () => {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        router.push("/auth");
+        console.log("Signed out successfully");
+      })
+      .catch((error: { code: any; message: any }) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+        // ..
+      });
+  };
+
+  return { user, login, signup, logout };
 }
