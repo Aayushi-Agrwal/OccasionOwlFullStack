@@ -24,7 +24,7 @@ export default function useFirebaseUser() {
     });
   }, [router]);
 
-  const login = (
+  const login = async (
     e: { preventDefault: () => void },
     email: string,
     password: string
@@ -34,7 +34,7 @@ export default function useFirebaseUser() {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        router.push("/chatroom");
+        router.push("/app/chatroom");
         console.log(user);
       })
       .catch((error) => {
@@ -45,5 +45,28 @@ export default function useFirebaseUser() {
       });
   };
 
-  return { user, login };
+  const signup = async (
+    e: { preventDefault: () => void },
+    email: string,
+    password: string
+  ) => {
+    e.preventDefault();
+
+    await createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+        router.push("/chatroom");
+        // ...
+      })
+      .catch((error: { code: any; message: any }) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+        // ..
+      });
+  };
+
+  return { user, login, signup };
 }

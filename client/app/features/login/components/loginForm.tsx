@@ -6,7 +6,6 @@ import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import useFirebaseUser from "@/app/hooks/useFirebaseUser";
 
 interface props {
@@ -22,11 +21,9 @@ export const LoginForm: React.FC<props> = ({
   message,
   messageAction,
 }) => {
-  const router = useRouter();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { user, login } = useFirebaseUser();
+  const { login } = useFirebaseUser();
 
   return (
     <div className="flex h-full flex-col justify-center items-center">

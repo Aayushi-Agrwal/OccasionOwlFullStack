@@ -5,13 +5,8 @@ import { InputField, InputFieldPassword } from "@/app/components/Input";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-import { auth } from "@/app/lib/firebase";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import useFirebaseUser from "@/app/hooks/useFirebaseUser";
 
 interface props {
   title: string;
@@ -25,29 +20,10 @@ export const SignupForm: React.FC<props> = ({
   message,
   messageAction,
 }) => {
-  const router = useRouter();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { signup } = useFirebaseUser();
 
-  const onSubmitSignup = async (e: { preventDefault: () => void }) => {
-    e.preventDefault();
-
-    await createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log(user);
-        router.push("/chatroom");
-        // ...
-      })
-      .catch((error: { code: any; message: any }) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-        // ..
-      });
-  };
   return (
     <div className="flex h-full flex-col justify-center items-center">
       <h1 className="text-2xl tracking-wider pb-8">{title}</h1>
@@ -68,7 +44,11 @@ export const SignupForm: React.FC<props> = ({
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <BoxButton type="submit" name={buttonTitle} onClick={onSubmitSignup} />
+        <BoxButton
+          type="submit"
+          name={buttonTitle}
+          onClick={(e) => signup(e, email, password)}
+        />
       </form>
       <p className="pt-4">
         {message}
