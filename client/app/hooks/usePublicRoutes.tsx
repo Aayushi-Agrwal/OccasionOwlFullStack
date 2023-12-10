@@ -4,20 +4,20 @@ import { auth } from "@/app/lib/firebase";
 import { useRouter } from "next/navigation";
 import { JSX, useEffect, useState } from "react";
 
-export function withProtected(Component: any) {
+export function withPublic(Component: any) {
   return function WithProtected(props: JSX.IntrinsicAttributes) {
     const router = useRouter();
-    const [isUserValid, setIsUserValid] = useState(false);
+    const [isUserInValid, setIsUserInValid] = useState(false);
 
     useEffect(() => {
       const checkAuth = () => {
         auth.onAuthStateChanged((user) => {
-          if (user) {
-            setIsUserValid(true);
-            console.log("This is the logged in user", user);
-          } else {
+          if (!user) {
+            setIsUserInValid(true);
             console.log("no user found");
-            router.push("/auth");
+          } else {
+            console.log("This is the logged in user", user);
+            router.push("/app/chatroom");
           }
         });
       };
@@ -25,7 +25,7 @@ export function withProtected(Component: any) {
       checkAuth();
     }, []);
 
-    if (isUserValid) {
+    if (isUserInValid) {
       return <Component auth={auth} {...props} />;
     }
   };

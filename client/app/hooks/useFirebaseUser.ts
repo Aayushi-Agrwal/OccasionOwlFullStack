@@ -9,20 +9,23 @@ import {
 } from "firebase/auth";
 import { useEffect, useState } from "react";
 
-export default function useFirebaseUser() {
+export default function useFirebaseUser(opts?: {
+  canGoHomeIfUnauthorized: boolean;
+}) {
   const [user, setUser] = useState<User | null>(auth.currentUser);
   const router = useRouter();
   useEffect(() => {
     auth.onAuthStateChanged(async (user) => {
-      if (user) {
-        // router.refresh;
+      if (!user && opts?.canGoHomeIfUnauthorized) {
+        router.replace("/auth");
+        console.log("signed out");
+        return;
+      } else {
         setUser(user);
         console.log("authenticated", user);
-      } else {
-        console.log("signed out");
       }
     });
-  }, [router]);
+  }, [opts?.canGoHomeIfUnauthorized, router]);
 
   const login = async (
     e: { preventDefault: () => void },
@@ -57,7 +60,7 @@ export default function useFirebaseUser() {
         // Signed in
         const user = userCredential.user;
         console.log(user);
-        router.push("/app/chatroom");
+        router.push("/chatroom");
         // ...
       })
       .catch((error: { code: any; message: any }) => {
@@ -74,6 +77,7 @@ export default function useFirebaseUser() {
         // Sign-out successful.
         router.push("/auth");
         console.log("Signed out successfully");
+        setUser(null);
       })
       .catch((error: { code: any; message: any }) => {
         const errorCode = error.code;
