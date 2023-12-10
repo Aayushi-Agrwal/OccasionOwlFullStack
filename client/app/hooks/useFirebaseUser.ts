@@ -6,24 +6,17 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  GoogleAuthProvider,
+  getAuth,
+  signInWithPopup,
 } from "firebase/auth";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+
+const provider = new GoogleAuthProvider();
 
 export default function useFirebaseUser() {
   const [user, setUser] = useState<User | null>(auth.currentUser);
   const router = useRouter();
-  // useEffect(() => {
-  //   auth.onAuthStateChanged(async (user) => {
-  //     if (!user && opts?.canGoHomeIfUnauthorized) {
-  //       router.replace("/auth");
-  //       console.log("signed out");
-  //       return;
-  //     } else {
-  //       setUser(user);
-  //       console.log("authenticated", user);
-  //     }
-  //   });
-  // }, [opts?.canGoHomeIfUnauthorized, router]);
 
   const login = async (
     e: { preventDefault: () => void },
@@ -42,6 +35,25 @@ export default function useFirebaseUser() {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
+        return null;
+      });
+  };
+
+  const googleLogin = async () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential?.accessToken;
+        const user = result.user;
+        router.push("/app/chatroom");
+        console.log(user, token);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        const email = error.customData.email;
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        console.log(errorCode, errorMessage, email, credential);
         return null;
       });
   };
@@ -65,7 +77,7 @@ export default function useFirebaseUser() {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
-        // ..
+        return null;
       });
   };
 
@@ -81,9 +93,9 @@ export default function useFirebaseUser() {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
-        // ..
+        return null;
       });
   };
 
-  return { user, login, signup, logout };
+  return { user, login, googleLogin, signup, logout };
 }

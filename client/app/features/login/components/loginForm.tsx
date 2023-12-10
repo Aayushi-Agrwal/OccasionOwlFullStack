@@ -2,6 +2,7 @@
 
 import { BoxButton, BoxButtonWhite } from "@/app/components/Button";
 import { InputField, InputFieldPassword } from "@/app/components/Input";
+import useFirebaseUser from "@/app/hooks/useFirebaseUser";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
@@ -30,6 +31,7 @@ export const LoginForm: React.FC<props> = ({
 }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { googleLogin } = useFirebaseUser();
 
   return (
     <div className="flex h-full flex-col justify-center items-center">
@@ -70,7 +72,7 @@ export const LoginForm: React.FC<props> = ({
           <div className="flex-grow border-t border-white"></div>
         </div>
 
-        <BoxButtonWhite>
+        <BoxButtonWhite onClick={googleLogin}>
           <FontAwesomeIcon icon={faGoogle} /> Continue with Google
         </BoxButtonWhite>
       </div>
