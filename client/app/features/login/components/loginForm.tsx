@@ -6,13 +6,19 @@ import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { useState } from "react";
-import useFirebaseUser from "@/app/hooks/useFirebaseUser";
 
 interface props {
   title: string;
   buttonTitle: string;
   message: string;
   messageAction: string;
+  action: (
+    e: {
+      preventDefault: () => void;
+    },
+    email: string,
+    password: string
+  ) => Promise<void>;
 }
 
 export const LoginForm: React.FC<props> = ({
@@ -20,10 +26,10 @@ export const LoginForm: React.FC<props> = ({
   buttonTitle,
   message,
   messageAction,
+  action,
 }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useFirebaseUser();
 
   return (
     <div className="flex h-full flex-col justify-center items-center">
@@ -48,7 +54,7 @@ export const LoginForm: React.FC<props> = ({
         <BoxButton
           type="submit"
           name={buttonTitle}
-          onClick={(e) => login(e, email, password)}
+          onClick={(e) => action(e, email, password)}
         />
       </form>
       <p className="pt-4">

@@ -17,7 +17,14 @@ export function withProtected(Component: any) {
             console.log("This is the logged in user", user);
           } else {
             console.log("no user found");
+            // const ShowComponent = () => {
+            //   return <h1 className="bg-white text-lg">Loading</h1>;
+            // };
+            // <ShowComponent />;
+            // setTimeout(() => {
             router.push("/auth");
+            // }, 1000);
+            return;
           }
         });
       };
