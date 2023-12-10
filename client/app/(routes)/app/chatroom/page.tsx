@@ -1,6 +1,6 @@
 "use client";
 
-import Chatroom from "@/app/features/chatroom/page";
+import Chatroom from "@/app/features/chatroom";
 import { withProtected } from "@/app/hooks/useProtectedRoutes";
 
 function chatroom() {
