@@ -6,7 +6,6 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-  onAuthStateChanged,
 } from "firebase/auth";
 import { useEffect, useState } from "react";
 
@@ -58,7 +57,7 @@ export default function useFirebaseUser() {
         // Signed in
         const user = userCredential.user;
         console.log(user);
-        router.push("/chatroom");
+        router.push("/app/chatroom");
         // ...
       })
       .catch((error: { code: any; message: any }) => {
