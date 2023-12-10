@@ -7,24 +7,28 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { useState } from "react";
 import useFirebaseUser from "@/app/hooks/useFirebaseUser";
+import useAuth from "@/app/hooks/authProvider";
+import { withPublic } from "@/app/hooks/withPublic";
 
 interface props {
   title: string;
   buttonTitle: string;
   message: string;
   messageAction: string;
+  auth: any;
 }
 
-export const LoginForm: React.FC<props> = ({
+const LoginForm: React.FC<props> = ({
   title,
   buttonTitle,
   message,
   messageAction,
+  auth,
 }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useFirebaseUser();
-
+  // const { login } = useFirebaseUser();
+  const { userState, loginWithGoogle, errorState } = auth;
   return (
     <div className="flex h-full flex-col justify-center items-center">
       <h1 className="text-2xl tracking-wider pb-8">{title}</h1>
@@ -45,11 +49,7 @@ export const LoginForm: React.FC<props> = ({
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <BoxButton
-          type="submit"
-          name={buttonTitle}
-          onClick={(e) => login(e, email, password)}
-        />
+        <BoxButton type="submit" name={buttonTitle} onClick={loginWithGoogle} />
       </form>
       <p className="pt-4">
         {message}
@@ -71,3 +71,5 @@ export const LoginForm: React.FC<props> = ({
     </div>
   );
 };
+
+export default withPublic(LoginForm);
