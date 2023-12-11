@@ -1,7 +1,7 @@
 "use client";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ChatBox } from "./ChatBox";
 import {
   faArrowRight,
@@ -9,10 +9,23 @@ import {
   faMicrophone,
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
+import io from "socket.io-client";
+
+const socket = io("http://localhost:5000");
 
 export const Chat = ({ name }: { name: string }) => {
-  const [sendActive, setSendActive] = useState(false);
+  const [sendActive, setSendActive] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>("");
   const [messages, setMessages] = useState<Array<string>>([]);
+  // const [senderName, setSenderName] = useState<string>('');
+  // const [message, setMessage] = useState('');
+  // const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    socket.on("message", (message) => {
+      setMessages((messages) => [...messages, message]);
+    });
+  }, []);
 
   const ReceivedMessages = ({
     key,
@@ -57,11 +70,21 @@ export const Chat = ({ name }: { name: string }) => {
 
   function addMessage(e: any) {
     e.preventDefault();
-    const newMessage: string = e.target.typeBox.value;
-    setMessages((current) => [...current, newMessage]);
-    e.target.typeBox.value = "";
-    setSendActive(false);
+    if (message) {
+      socket.emit("sendMessage", { message });
+      // setSenderName('');
+      setMessage("");
+    }
   }
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   if (name && message) {
+  //     socket.emit('sendMessage', { name, message });
+  //     setName('');
+  //     setMessage('');
+  //   }
+  // };
 
   const mapMessage = messages.map((message: string, key: number) => {
     return <SentMessages key={key} message={message} />;
