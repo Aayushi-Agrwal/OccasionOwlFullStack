@@ -1,13 +1,12 @@
 "use client";
 import { auth } from "@/app/lib/firebase";
-import { User } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import {
+  User,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
   GoogleAuthProvider,
-  getAuth,
   signInWithPopup,
 } from "firebase/auth";
 import { useState } from "react";
@@ -25,13 +24,13 @@ export default function useFirebaseUser() {
   ) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+      .then((userCredential: { user: any }) => {
         // Signed in
         const user = userCredential.user;
         router.push("/app/chatroom");
         console.log(user);
       })
-      .catch((error) => {
+      .catch((error: { code: any; message: any }) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
@@ -66,7 +65,7 @@ export default function useFirebaseUser() {
     e.preventDefault();
 
     await createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+      .then((userCredential: { user: any }) => {
         // Signed in
         const user = userCredential.user;
         console.log(user);
