@@ -9,23 +9,29 @@ import {
   faMicrophone,
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
-import io from "socket.io-client";
-
-const socket = io("http://localhost:5000");
+import axios from "axios";
 
 export const Chat = ({ name }: { name: string }) => {
   const [sendActive, setSendActive] = useState<boolean>(false);
-  const [message, setMessage] = useState<string>("");
+  // const [message, setMessage] = useState<string>("");
   const [messages, setMessages] = useState<Array<string>>([]);
-  // const [senderName, setSenderName] = useState<string>('');
-  // const [message, setMessage] = useState('');
-  // const [messages, setMessages] = useState([]);
+
+  const port = process.env.NEXT_PUBLIC_API_PORT;
+  const fetchChats = async () => {
+    const data = await axios.get(`${port}/api/chat`);
+    console.log(data.data);
+    // setMessages(data.data);
+  };
 
   useEffect(() => {
-    socket.on("message", (message) => {
-      setMessages((messages) => [...messages, message]);
-    });
+    fetchChats();
   }, []);
+
+  // useEffect(() => {
+  //   fetch("http://localhost:8000/message")
+  //     .then((res) => res.json())
+  //     .then((data) => setMessages(data.message));
+  // }, []);
 
   const ReceivedMessages = ({
     key,
@@ -70,21 +76,11 @@ export const Chat = ({ name }: { name: string }) => {
 
   function addMessage(e: any) {
     e.preventDefault();
-    if (message) {
-      socket.emit("sendMessage", { message });
-      // setSenderName('');
-      setMessage("");
-    }
+    const newMessage: string = e.target.typeBox.value;
+    setMessages((current) => [...current, newMessage]);
+    e.target.typeBox.value = "";
+    setSendActive(false);
   }
-
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   if (name && message) {
-  //     socket.emit('sendMessage', { name, message });
-  //     setName('');
-  //     setMessage('');
-  //   }
-  // };
 
   const mapMessage = messages.map((message: string, key: number) => {
     return <SentMessages key={key} message={message} />;

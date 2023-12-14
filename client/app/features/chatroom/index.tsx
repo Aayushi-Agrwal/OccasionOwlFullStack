@@ -3,7 +3,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import { Box, SelectedBox } from "@/app/components/Box";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { events } from "@/app/constants/events";
 import useFirebaseUser from "@/app/hooks/useFirebaseUser";
 import { EventsChat } from "./components/EventsChat";
